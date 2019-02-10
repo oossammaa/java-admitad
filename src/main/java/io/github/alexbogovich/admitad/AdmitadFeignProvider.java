@@ -13,9 +13,6 @@ import javax.xml.bind.JAXBException;
 import java.util.Arrays;
 import java.util.List;
 
-//token: bb795e6ba10006d595e7
-//http://export.admitad.com/ru/webmaster/websites/946281/products/export_adv_products/?user=kreys96&code=izvsiak2t7&feed_id=14216&format=xml
-
 public class AdmitadFeignProvider {
 
     public static final String API_URL = "https://api.admitad.com";
