@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "io.github.alexbogovich"
-version = "0.0.1"
+version = "0.0.2"
 
 repositories {
     jcenter()
@@ -33,6 +33,11 @@ dependencies {
 
 configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+tasks.withType(JavaCompile::class) {
+    options.compilerArgs.add("-parameters")
 }
 
 tasks.named<Test>("test") {
