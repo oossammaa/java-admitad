@@ -1,7 +1,11 @@
+import com.jfrog.bintray.gradle.BintrayExtension
+
 plugins {
     `java-library`
     `maven-publish`
     id("io.franzbecker.gradle-lombok") version "2.0"
+    id("com.jfrog.bintray") version "1.8.4"
+    id("com.gradle.build-scan") version "2.1"
 }
 
 group = "io.github.alexbogovich"
@@ -41,11 +45,28 @@ publishing {
             from(components["java"])
         }
     }
+}
 
-    repositories {
-        maven {
-            name = "myRepo"
-            url = uri("file://${buildDir}/repo")
-        }
-    }
+bintray {
+    user = System.getenv("BINTRAY_USER")
+    key = System.getenv("BINTRAY_KEY")
+    publish = true
+    override = true
+    setPublications("admitad")
+    pkg(delegateClosureOf<BintrayExtension.PackageConfig> {
+        repo = "repo"
+        name = project.name
+        userOrg = "alexbogovich"
+        websiteUrl = "https://github.com/alexbogovich/$name"
+        githubRepo = "alexbogovich/$name"
+        vcsUrl = "https://github.com/alexbogovich/$name"
+        description = "Admitad java connector"
+        setLabels("java", "admitad")
+        setLicenses("MIT")
+    })
+}
+
+buildScan {
+    termsOfServiceUrl = "https://gradle.com/terms-of-service"
+    setTermsOfServiceAgree("yes")
 }
