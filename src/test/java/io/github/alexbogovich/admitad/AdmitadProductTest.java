@@ -23,16 +23,20 @@ class AdmitadProductTest {
     private AdmitadFeignProvider provider;
 
     private final String AERO_URL = "/ru/webmaster/websites/123/products/export_adv_products/?user=testuser&code=izvsiak2t7&feed_id=14216&format=xml";
+    private final String RICHE_URL = "/ru/webmaster/websites/666/products/export_adv_products/?user=testuser&code=izvsiak2t7&feed_id=14216&format=xml";
 
     @BeforeEach
     void setUp() throws JAXBException, IOException {
         provider = new AdmitadFeignProvider();
 
         String aero = this.getClass().getClassLoader().getResource("testdata/products/simplified_AERO.xml").getFile();
-        InputStream inputStream = new FileInputStream(new File(aero));
+        InputStream aeroStream = new FileInputStream(new File(aero));
+        String riche = this.getClass().getClassLoader().getResource("testdata/products/Riche.xml").getFile();
+        InputStream richeStream = new FileInputStream(new File(riche));
 
         mockClient = new MockClient()
-                .add(HttpMethod.GET, AERO_URL, 200, inputStream);
+                .add(HttpMethod.GET, AERO_URL, 200, aeroStream)
+                .add(HttpMethod.GET, RICHE_URL, 200, richeStream);
 
         admitadProduct = provider.getAdmitadProductFeignBuilder()
                 .client(mockClient)
@@ -66,6 +70,7 @@ class AdmitadProductTest {
         Offer offer8035 = Offer.builder()
                 .available(true)
                 .id(8035L)
+                .bid(null)
                 .categoryId(2265L)
                 .currencyId(currency.getId())
                 .delivery(true)
@@ -89,6 +94,7 @@ class AdmitadProductTest {
         Offer offer8362 = Offer.builder()
                 .available(true)
                 .id(8362L)
+                .bid(null)
                 .categoryId(2265L)
                 .currencyId(currency.getId())
                 .delivery(true)
@@ -116,6 +122,7 @@ class AdmitadProductTest {
         Offer offer43523 = Offer.builder()
                 .available(true)
                 .id(43523L)
+                .bid(null)
                 .categoryId(2265L)
                 .currencyId(currency.getId())
                 .delivery(true)
@@ -150,6 +157,19 @@ class AdmitadProductTest {
         ProductResponse expected = ProductResponse.builder().date("2019-01-30 16:05").shop(merch).build();
         Assertions.assertEquals(expected, product);
     }
+
+    @Test
+    public void richeIsParsed() {
+        Map<String, Object> query = new LinkedHashMap<>();
+        query.put("user", "testuser");
+        query.put("code", "izvsiak2t7");
+        query.put("feed_id", "14216");
+        query.put("format", "xml");
+        ProductResponse product = admitadProduct.product("ru", "666", query);
+        mockClient.verifyOne(HttpMethod.GET, RICHE_URL);
+        Assertions.assertNotNull(product);
+    }
+
 
     @AfterEach
     void tearDown() {
