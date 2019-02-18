@@ -1,5 +1,6 @@
 package io.github.alexbogovich.admitad.response.product;
 
+import io.github.alexbogovich.admitad.adapters.IntegerAdapter;
 import io.github.alexbogovich.admitad.adapters.LongAdapter;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -26,8 +27,8 @@ public class Offer {
     @XmlAttribute
     @XmlJavaTypeAdapter(LongAdapter.class)
     Long bid;
-    @XmlJavaTypeAdapter(LongAdapter.class)
-    Long categoryId;
+    @XmlJavaTypeAdapter(IntegerAdapter.class)
+    Integer categoryId;
     String currencyId;
     Boolean delivery;
     String description;

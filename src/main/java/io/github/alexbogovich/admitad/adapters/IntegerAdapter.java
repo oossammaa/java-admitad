@@ -1,12 +1,11 @@
 package io.github.alexbogovich.admitad.adapters;
 
-public class LongAdapter extends NullabelAdapter<Long> {
-
+public class IntegerAdapter extends NullabelAdapter<Integer> {
     @Override
-    public Long unmarshal(String v) {
+    public Integer unmarshal(String v) {
         if (isEmptyOrNull(v)) {
             return null;
         }
-        return Long.valueOf(v);
+        return Integer.valueOf(v);
     }
 }
