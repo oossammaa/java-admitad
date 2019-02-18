@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "io.github.alexbogovich"
-version = "0.0.5"
+version = "0.0.6"
 
 repositories {
     jcenter()
@@ -24,6 +24,7 @@ dependencies {
     api("io.github.openfeign:feign-core:$feign")
     implementation("io.github.openfeign:feign-jackson:$feign")
     implementation("io.github.openfeign:feign-jaxb:$feign")
+    implementation("io.github.openfeign:feign-slf4j:$feign")
     implementation("org.apache.httpcomponents:httpclient:4.5.7")
 
     testImplementation("io.github.openfeign:feign-mock:$feign")

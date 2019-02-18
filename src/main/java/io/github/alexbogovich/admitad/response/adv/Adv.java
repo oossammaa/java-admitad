@@ -12,7 +12,7 @@ import java.util.List;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Adv {
-    Integer id;
+    Long id;
     String name;
     String image;
     String status;
