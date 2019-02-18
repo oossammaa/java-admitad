@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
-import java.util.Set;
+import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -21,14 +21,14 @@ public class Merchant {
     String url;
     @XmlElementWrapper(name="currencies")
     @XmlElement(name="currency")
-    Set<Currency> currencies;
+    List<Currency> currencies;
     @XmlElementWrapper(name="categories")
     @XmlElement(name="category")
-    Set<Category> categories;
+    List<Category> categories;
     @XmlElement(name = "local_delivery_cost")
     String localDeliveryCost;
     String cpa;
     @XmlElementWrapper(name="offers")
     @XmlElement(name="offer")
-    Set<Offer> offers;
+    List<Offer> offers;
 }

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.Set;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -24,9 +24,9 @@ public class Adv {
     String siteUrl;
     Boolean exclusive;
     String currency;
-    Set<AdvRegion> regions;
-    Set<AdvCategory> categories;
-    Set<AdvAction> actions;
+    List<AdvRegion> regions;
+    List<AdvCategory> categories;
+    List<AdvAction> actions;
     Double cr;
     @JsonProperty("cr_trend")
     String crTrend;
@@ -64,7 +64,7 @@ public class Adv {
     String productsCsvLink;
     @JsonProperty("products_xml_link")
     String productsXmlLink;
-    Set<AdvTraffic> traffics;
+    List<AdvTraffic> traffics;
     @JsonProperty("landing_code")
     String landingCode;
     @JsonProperty("landing_title")
@@ -79,5 +79,5 @@ public class Adv {
     @JsonProperty("connection_status")
     String connectionStatus;
     @JsonProperty("feeds_info")
-    Set<AdvFeedInfo> feedsInfo;
+    List<AdvFeedInfo> feedsInfo;
 }

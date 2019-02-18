@@ -3,7 +3,6 @@ package io.github.alexbogovich.admitad;
 import feign.mock.HttpMethod;
 import feign.mock.MockClient;
 import feign.mock.MockTarget;
-import io.github.alexbogovich.admitad.response.product.Currency;
 import io.github.alexbogovich.admitad.response.product.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -15,7 +14,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import static java.util.Arrays.asList;
 
 class AdmitadProductTest {
     private AdmitadProduct admitadProduct;
@@ -61,7 +64,7 @@ class AdmitadProductTest {
         Category cat2255 = Category.builder().id(2255L).parentId(cat22195.getId()).name("Столы деревянные").build();
         Category cat22188 = Category.builder().id(22188L).parentId(cat22195.getId()).name("Столы лакированные").build();
         Category cat22108 = Category.builder().id(22108L).parentId(cat22195.getId()).name("Столы стеклянные").build();
-        Set<Category> cats = setOf(cat22, cat22195, cat22190, cat2255, cat22188, cat22108);
+        List<Category> cats = asList(cat22, cat22195, cat22190, cat2255, cat22188, cat22108);
 
         OfferParam verticalSetting = OfferParam.builder().name("Регулировка высоты").value("Без регулировки").build();
         OfferParam size = OfferParam.builder().name("РАЗМЕР: Высота до сидения").value("47").build();
@@ -79,8 +82,8 @@ class AdmitadProductTest {
                 .model("B70")
                 .modifiedTime("1539113811")
                 .name("Стул для гостиной металлический B70 – табак")
-                .params(setOf(verticalSetting, size, weight))
-                .picture(setOf(
+                .params(asList(verticalSetting, size, weight))
+                .picture(asList(
                         "https://www.mebelaero.ru/upload/iblock/c51/c51d6c56da31a792b613538f86d67d31.jpg",
                         "https://www.mebelaero.ru/upload/iblock/0d1/0d165d4a5b93fc585eb24c8de7b78d9a.jpg"
                 ))
@@ -103,8 +106,8 @@ class AdmitadProductTest {
                 .model("B70")
                 .modifiedTime("1541111177")
                 .name("Стул кухонный металлический B70 – белый")
-                .params(setOf(verticalSetting, size, weight))
-                .picture(setOf(
+                .params(asList(verticalSetting, size, weight))
+                .picture(asList(
                         "https://www.mebelaero.ru/upload/iblock/f8e/f8ea9da04a44336ff097b26434fbdd2e.jpg",
                         "https://www.mebelaero.ru/upload/iblock/df0/df06e9661edfd6ac5c881cb5cdd1d9e7.jpg"
                 ))
@@ -131,8 +134,8 @@ class AdmitadProductTest {
                 .model("B805")
                 .modifiedTime("1548866473")
                 .name("Стул для гостиной металлический B805 – латте")
-                .params(setOf(colorLatte, colorCarcus, colorAbc, sizeLength))
-                .picture(setOf(
+                .params(asList(colorLatte, colorCarcus, colorAbc, sizeLength))
+                .picture(asList(
                         "https://www.mebelaero.ru/upload/iblock/65f/65f68ce2664c5aa6f592f9595e5f4d4a.jpg",
                         "https://www.mebelaero.ru/upload/iblock/b4e/b4ee49e98d9e855bd7c5a76ba0a6af6a.jpg"
                 ))
@@ -147,11 +150,11 @@ class AdmitadProductTest {
                 .name("AERO: столы и стулья")
                 .company("AERO: столы и стулья")
                 .url("https://www.mebelaero.ru")
-                .currencies(setOf(currency))
+                .currencies(asList(currency))
                 .categories(cats)
                 .localDeliveryCost("500")
                 .cpa("0")
-                .offers(setOf(offer8035, offer8362, offer43523))
+                .offers(asList(offer8035, offer8362, offer43523))
                 .build();
 
         ProductResponse expected = ProductResponse.builder().date("2019-01-30 16:05").shop(merch).build();
@@ -173,10 +176,5 @@ class AdmitadProductTest {
 
     @AfterEach
     void tearDown() {
-    }
-
-
-    private <T> Set<T> setOf(T... a) {
-        return new HashSet<>(Arrays.asList(a));
     }
 }

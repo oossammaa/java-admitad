@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.util.Set;
+import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -38,9 +38,9 @@ public class Offer {
     String modifiedTime;
     String name;
     @XmlElement(name = "param")
-    Set<OfferParam> params;
+    List<OfferParam> params;
     @XmlElement(name = "picture")
-    Set<String> picture;
+    List<String> picture;
     Double price;
     @XmlElement(name = "sales_notes")
     String notes;
